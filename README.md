@@ -1,5 +1,8 @@
 ## Conjure Clojure additions vanilla (no nREPL)
 
+This plugin implements jumping to test function without adding nREPL test middleware and without adding it as a dependency.
+To use nREPL-based plugin use this one: https://github.com/Invertisment/conjure-clj-additions-nrepl/
+
 Provides two modes to jump to failing test and execute tests (functions have to be mapped manually):
 1. Conjure's original mode -- limited jumping but more basic setup and doesn't require to add nREPL in your `:dev` deps
 
