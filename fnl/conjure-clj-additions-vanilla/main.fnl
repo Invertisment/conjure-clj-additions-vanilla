@@ -1,3 +1,9 @@
+(module conjure-clj-additions-vanilla.main
+  {require {nvim conjure.aniseed.nvim
+            str conjure.aniseed.string
+            bridge conjure.bridge
+            }})
+
 (defn provide-fn! [fn-name ns f]
   (nvim.ex.command_
     (.. "-range " fn-name)
