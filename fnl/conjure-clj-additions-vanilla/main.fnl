@@ -1,39 +1,18 @@
-(module conjure-clj-additions-vanilla.main
-  {require {nvim conjure.aniseed.nvim
-            str conjure.aniseed.string
-            bridge conjure.bridge
-            config conjure.config
-            fns conjure-clj-additions-vanilla.additional-fns
-            load-util conjure-clj-additions-vanilla.load-util
-            }})
-
 (defn provide-fn! [fn-name ns f]
   (nvim.ex.command_
     (.. "-range " fn-name)
     (bridge.viml->lua ns f {})))
 
-(defn load-test-middleware! []
-  (load-util.try-load! "clojure" 10 fns.nrepl-middleware-present? fns.load-test-middleware!))
-
 (defn on-filetype []
-  (provide-fn! :CcaNsJumpToAlternate :conjure-clj-additions-vanilla.additional-fns :jump-to-alternate-ns!)
+  (provide-fn! :CcavNsJumpToAlternate :conjure-clj-additions-vanilla.additional-fns :jump-to-alternate-ns!)
 
   ;; log-parsing functions (based on original way Conjure does things on its own)
-  (provide-fn! :CcaRunTestsInTestNs :conjure-clj-additions-vanilla.additional-fns :run-test-ns-tests!)
-  (provide-fn! :CcaJumpToFailingCljTest :conjure-clj-additions-vanilla.additional-fns :jump-to-first-failing!)
-
-  ;; nrepl-based functions
-  (provide-fn! :CcaNreplLoadTestMiddleware :conjure-clj-additions-vanilla.main :load-test-middleware!)
-  (provide-fn! :CcaNreplRunTestsInTestNs :conjure-clj-additions-vanilla.additional-fns :nrepl-middleware-run-test-ns-tests!)
-  (provide-fn! :CcaNreplRunCurrentTest :conjure-clj-additions-vanilla.additional-fns :nrepl-run-current-test!)
-  (provide-fn! :CcaNreplJumpToFailingCljTest :conjure-clj-additions-vanilla.additional-fns :nrepl-jump-to-nth-failing!)
-  ;todo (provide-fn! :ConjureAdditionsRunTestsRetest :conjure-clj-additions-vanilla.additional-fns :retest!)
+  (provide-fn! :CcavRunTestsInTestNs :conjure-clj-additions-vanilla.additional-fns :run-test-ns-tests!)
+  (provide-fn! :CcavJumpToFailingCljTest :conjure-clj-additions-vanilla.additional-fns :jump-to-first-failing!)
 
   ;; util
-  (provide-fn! :CcaNsRemove :conjure-clj-additions-vanilla.additional-fns :remove-ns!)
-  (provide-fn! :CcaNsCleanup :conjure-clj-additions-vanilla.additional-fns :cleanup-ns!)
-
-  (load-test-middleware!))
+  (provide-fn! :CcavNsRemove :conjure-clj-additions-vanilla.additional-fns :remove-ns!)
+  (provide-fn! :CcavNsCleanup :conjure-clj-additions-vanilla.additional-fns :cleanup-ns!))
 
 (defn init-mappings! []
   (nvim.ex.augroup :jump_to_clj_test_init_filetypes)
