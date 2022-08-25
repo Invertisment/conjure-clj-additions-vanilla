@@ -1,3 +1,3 @@
 if has("nvim")
-  lua require("conjure-clj-additions.main").init()
+  lua require("conjure-clj-additions-vanilla.main").init()
 endif
